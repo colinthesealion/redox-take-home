@@ -20,9 +20,9 @@ const columns = [
     },
   },
   {
-    property: 'location',
+    property: 'route',
     header: {
-      label: 'Location',
+      label: 'Route',
     },
     cell: {
       formatters: [
