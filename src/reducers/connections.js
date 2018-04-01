@@ -10,6 +10,15 @@ const initialState = Immutable.fromJS([
     id: 1,
     name: 'athena',
     communicationMethod: COMMUNICATION_METHODS.HTTPS,
+    URL: 'https://athenanet.com/',
+    requestMethod: 'POST',
+  },
+  {
+    id: 2,
+    name: 'epic',
+    communicationMethod: COMMUNICATION_METHODS.TCP,
+    ip: '1.1.1.1',
+    port: 1234,
   },
 ]);
 
