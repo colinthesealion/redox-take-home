@@ -34,13 +34,17 @@ class App extends Component {
       <Provider store={store}>
         <div>
           <button onClick={this.toggleModal}>Add New Connection</button>
-          <Modal
-            aria-labelledby='modal-label'
-            show={this.state.showModal}
-            onHide={this.toggleModal}
-          >
-            <ConnectionForm />
-          </Modal>
+          {
+            this.state.showModal&& (
+              <Modal
+                aria-labelledby='modal-label'
+                show={this.state.showModal}
+                onHide={this.toggleModal}
+              >
+                <ConnectionForm toggleModal={this.toggleModal} />
+              </Modal>
+            )
+          }
           <ConnectionsList />
         </div>
       </Provider>

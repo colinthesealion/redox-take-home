@@ -20,6 +20,7 @@ const ConnectionForm = ({ handleSubmit, communicationMethod }) => {
           options={Object.keys(COMMUNICATION_METHODS)}
         />
       </label>
+      <button type="submit">Save</button>
     </form>
   );
 };
