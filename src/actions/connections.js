@@ -14,8 +14,8 @@ export const actionTypes = {
  * @param {String} communicationMethod one of HTTPS or TCP
  * @returns {Promise} a promise to add the connection to the redux store
  */
-const addConnection = ({ name, communicationMethod, url, requestMethod }) => {
-  return api.save({ name, communicationMethod, url, requestMethod })
+const addConnection = ({ name, communicationMethod, url, requestMethod, ip }) => {
+  return api.save({ name, communicationMethod, url, requestMethod, ip })
     .then((response) => {
       return response.json();
     })
@@ -28,6 +28,7 @@ const addConnection = ({ name, communicationMethod, url, requestMethod }) => {
           communicationMethod,
           url,
           requestMethod,
+          ip,
         },
       };
     });
@@ -40,8 +41,8 @@ const addConnection = ({ name, communicationMethod, url, requestMethod }) => {
  * @param {String} communicationMethod one of HTTPS or TCP
  * @returns {Promise} a promise to update the connection in the redux store
  */
-const updateConnection = ({ id, name, communicationMethod, url, requestMethod }) => {
-  return api.save({ id, name, communicationMethod, url, requestMethod })
+const updateConnection = ({ id, name, communicationMethod, url, requestMethod, ip }) => {
+  return api.save({ id, name, communicationMethod, url, requestMethod, ip })
     .then((response) => {
       return response.json();
     })
@@ -54,6 +55,7 @@ const updateConnection = ({ id, name, communicationMethod, url, requestMethod })
           communicationMethod,
           url,
           requestMethod,
+          ip,
         },
       }
     });

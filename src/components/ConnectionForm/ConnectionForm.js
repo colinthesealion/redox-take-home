@@ -29,6 +29,14 @@ const renderCommunicationMethodFields = (communicationMethod) => {
         </label>
       ];
     }
+    case COMMUNICATION_METHODS.TCP: {
+      return [
+        <label htmlFor="ip" key="ip">
+          IP:
+          <Field name="ip" component="input" type="text" required />
+        </label>
+      ];
+    }
     default: {
       return [];
     }
