@@ -18,6 +18,14 @@ const renderCommunicationMethodFields = (communicationMethod) => {
           URL:
           <Field name="url" component="input" type="text" />
         </label>,
+        <label htmlFor="requestMethod" key="requestMethod">
+          Request Method:
+          <Field
+            name="requestMethod"
+            component={RadioGroup}
+            options={[ 'POST', 'GET' ]}
+          />
+        </label>
       ];
     }
     default: {

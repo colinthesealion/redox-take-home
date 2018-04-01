@@ -21,7 +21,8 @@ describe('connections reducer', () => {
     const addConnectionAction = actions.addConnection({
       name: 'test',
       communicationMethod: COMMUNICATION_METHODS.HTTPS,
-      url: 'http://example.com/'
+      url: 'http://example.com/',
+      requestMethod: 'POST',
     });
     store.dispatch(addConnectionAction);
 
