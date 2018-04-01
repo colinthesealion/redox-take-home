@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux-immutable';
 import { createStore as createReduxStore } from 'redux';
+import { reducer as form } from 'redux-form'
 
 import connections from './reducers/connections';
 
 // The root reducer
-const rootReducer = combineReducers({ connections });
+const rootReducer = combineReducers({ connections, form });
 
 
 /**
