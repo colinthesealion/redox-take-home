@@ -34,6 +34,10 @@ const renderCommunicationMethodFields = (communicationMethod) => {
         <label htmlFor="ip" key="ip">
           IP:
           <Field name="ip" component="input" type="text" required />
+        </label>,
+        <label htmlFor="port" key="port">
+          Port:
+          <Field name="port" component="input" type="text" />
         </label>
       ];
     }

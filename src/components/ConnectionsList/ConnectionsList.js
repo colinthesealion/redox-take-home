@@ -32,7 +32,9 @@ const columns = [
               return `${rowData.requestMethod} to ${rowData.url}`;
             }
             case COMMUNICATION_METHODS.TCP: {
-              return `${rowData.ip}:${rowData.port}`;
+              return rowData.port
+                ? `${rowData.ip}:${rowData.port}`
+                : rowData.ip;
             }
             default: {
               return value;
