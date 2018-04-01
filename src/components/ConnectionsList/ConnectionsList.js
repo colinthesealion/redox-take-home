@@ -29,7 +29,7 @@ const columns = [
         (value, { rowData }) => {
           switch (rowData.communicationMethod) {
             case COMMUNICATION_METHODS.HTTPS: {
-              return `${rowData.requestMethod} to ${rowData.URL}`;
+              return `${rowData.requestMethod} to ${rowData.url}`;
             }
             case COMMUNICATION_METHODS.TCP: {
               return `${rowData.ip}:${rowData.port}`;
@@ -53,8 +53,8 @@ export default class ConnectionsList extends React.PureComponent {
           (id) => {
             return (
               <a
-                onClick={() => {
-                  this.props.toggleModal(id);
+                onClick={(event) => {
+                  this.props.toggleModal(event, id);
                 }}
               >
                 edit

@@ -8,10 +8,17 @@ import { getConnection } from '../../selectors/connections';
 
 const mapStateToProps = (state, ownProps) => {
   const formValues = getFormValues('connection')(state);
-  const initialValues = getConnection(state, ownProps.connectionId).toJS();
+  const initialValues = getConnection(state, ownProps.connectionId);
+  let communicationMethod;
+  if (formValues) {
+    communicationMethod = formValues.get('communicationMethod');
+  }
+  else if (initialValues) {
+    communicationMethod = initialValues.get('communicationMethod');
+  }
   return {
-    communicationMethod: formValues ? formValues.communicationMethod: undefined,
     initialValues,
+    communicationMethod,
   };
 };
 

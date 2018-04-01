@@ -21,6 +21,7 @@ describe('connections reducer', () => {
     const addConnectionAction = actions.addConnection({
       name: 'test',
       communicationMethod: COMMUNICATION_METHODS.HTTPS,
+      url: 'http://example.com/'
     });
     store.dispatch(addConnectionAction);
 
@@ -32,6 +33,7 @@ describe('connections reducer', () => {
         return (
           connection.get('name') === 'test'
           && connection.get('communicationMethod') === COMMUNICATION_METHODS.HTTPS
+          && connection.get('url') === 'http://example.com/'
         );
       })).toBeGreaterThan(-1);
 

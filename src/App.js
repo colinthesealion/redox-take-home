@@ -21,7 +21,7 @@ class App extends Component {
     };
   }
 
-  toggleModal(connectionId) {
+  toggleModal(event, connectionId) {
     this.setState((prevState) => {
       return {
         showModal: !prevState.showModal,
