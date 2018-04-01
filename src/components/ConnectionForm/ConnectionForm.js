@@ -16,7 +16,7 @@ const renderCommunicationMethodFields = (communicationMethod) => {
       return [
         <label htmlFor="url" key="url">
           URL:
-          <Field name="url" component="input" type="text" />
+          <Field name="url" component="input" type="text" required />
         </label>,
         <label htmlFor="requestMethod" key="requestMethod">
           Request Method:
@@ -24,6 +24,7 @@ const renderCommunicationMethodFields = (communicationMethod) => {
             name="requestMethod"
             component={RadioGroup}
             options={[ 'POST', 'GET' ]}
+            required
           />
         </label>
       ];
@@ -40,7 +41,7 @@ const ConnectionForm = ({ handleSubmit, communicationMethod }) => {
       <Field name="id" component="input" type="hidden" />
       <label htmlFor="name" key="name">
         Name:
-        <Field name="name" component="input" type="text" />
+        <Field name="name" component="input" type="text" required />
       </label>
       <label htmlFor="communicationMethod" key="communicationMethod">
         Communication Method:
@@ -48,6 +49,7 @@ const ConnectionForm = ({ handleSubmit, communicationMethod }) => {
           name="communicationMethod"
           component={RadioGroup}
           options={Object.keys(COMMUNICATION_METHODS)}
+          required
         />
       </label>
       {renderCommunicationMethodFields(communicationMethod)}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RadioGroup = ({ input, options }) => {
+const RadioGroup = ({ input, options, required }) => {
   return (
     <span>
       {options.map((option) => {
@@ -15,6 +15,7 @@ const RadioGroup = ({ input, options }) => {
               value={option}
               checked={option === input.value}
               onChange={input.onChange}
+              required={required}
             />
           </label>
         );
