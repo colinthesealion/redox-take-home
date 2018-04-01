@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux-immutable';
-import { createStore as createReduxStore } from 'redux';
-import { reducer as form } from 'redux-form'
+import { createStore as createReduxStore, compose, applyMiddleware } from 'redux';
+import { reducer as form } from 'redux-form';
+import promiseMiddleware from 'redux-promise';
 
 import connections from './reducers/connections';
 
 // The root reducer
 const rootReducer = combineReducers({ connections, form });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /**
  * Create the redux store for our application.
@@ -17,7 +19,7 @@ const createStore = (initialState) => {
   return createReduxStore(
     rootReducer,
     initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(promiseMiddleware))
   );
 }
 
