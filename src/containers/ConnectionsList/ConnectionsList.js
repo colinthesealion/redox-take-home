@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import ConnectionsList from '../../components/ConnectionsList';
+import { getConnections } from '../../selectors/connections';
 
 /**
  * Map from the redux state to the properties that should be applied to the component.
@@ -9,7 +10,7 @@ import ConnectionsList from '../../components/ConnectionsList';
  */
 const mapStateToProps = (state) => {
   return {
-    connections: state.get('connections'),
+    connections: getConnections(state),
   };
 };
 

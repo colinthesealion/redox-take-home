@@ -32,7 +32,7 @@ const initialState = Immutable.fromJS([
 const reducer = (state=initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_CONNECTION: {
-      return state.push(action.payload);
+      return state.push(Immutable.fromJS(action.payload));
     }
     default: {
       return state;
