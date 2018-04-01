@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
 import { createStore as createReduxStore, compose, applyMiddleware } from 'redux';
-import { reducer as form } from 'redux-form';
+import { reducer as form } from 'redux-form/immutable';
 import promiseMiddleware from 'redux-promise';
 
 import connections from './reducers/connections';

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import * as Table from 'reactabular-table';
 
@@ -45,8 +46,27 @@ const columns = [
 
 export default class ConnectionsList extends React.PureComponent {
   render() {
+    const editColumn = {
+      property: 'id',
+      cell: {
+        formatters: [
+          (id) => {
+            return (
+              <a
+                onClick={() => {
+                  this.props.toggleModal(id);
+                }}
+              >
+                edit
+              </a>
+              );
+          }
+        ]
+      }
+    };
+
     return (
-      <Table.Provider columns={columns}>
+      <Table.Provider columns={[ editColumn, ...columns ]}>
         <Table.Header />
         { /* Reactabular is expecting flat javascript objects,
              not an immutable list.
@@ -62,4 +82,5 @@ export default class ConnectionsList extends React.PureComponent {
 }
 ConnectionsList.propTypes = {
   connections: ImmutablePropTypes.listOf(ImmutablePropTypes.map),
+  toggleModal: PropTypes.func.isRequired,
 };

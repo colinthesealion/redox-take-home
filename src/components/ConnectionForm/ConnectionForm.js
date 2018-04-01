@@ -8,6 +8,7 @@ import RadioGroup from '../RadioGroup';
 const ConnectionForm = ({ handleSubmit, communicationMethod }) => {
   return (
     <form onSubmit={handleSubmit}>
+      <Field name="id" component="input" type="hidden" />
       <label htmlFor="name">
         Name:
         <Field name="name" component="input" type="text" />

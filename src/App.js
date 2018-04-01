@@ -21,10 +21,11 @@ class App extends Component {
     };
   }
 
-  toggleModal() {
+  toggleModal(connectionId) {
     this.setState((prevState) => {
       return {
         showModal: !prevState.showModal,
+        connectionId,
       };
     });
   }
@@ -41,11 +42,11 @@ class App extends Component {
                 show={this.state.showModal}
                 onHide={this.toggleModal}
               >
-                <ConnectionForm toggleModal={this.toggleModal} />
+                <ConnectionForm toggleModal={this.toggleModal} connectionId={this.state.connectionId} />
               </Modal>
             )
           }
-          <ConnectionsList />
+          <ConnectionsList toggleModal={this.toggleModal} />
         </div>
       </Provider>
     );

@@ -2,8 +2,9 @@ import fetchMock from 'fetch-mock';
 
 let nextId = 3;
 fetchMock.mock(/save/, (url, options) => {
+  const body = JSON.parse(options.body);
   return {
-    id: options.body.id || nextId++,
+    id: body.id || nextId++,
   };
 });
 
