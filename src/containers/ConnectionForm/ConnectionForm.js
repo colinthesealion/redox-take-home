@@ -3,7 +3,7 @@ import { getFormValues } from 'redux-form/immutable';
 
 import ConnectionForm from '../../components/ConnectionForm';
 import { actions } from '../../actions/connections';
-import { getConnection } from '../../selectors/connections';
+import { getConnection, getConnections } from '../../selectors/connections';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,9 +16,19 @@ const mapStateToProps = (state, ownProps) => {
   else if (initialValues) {
     communicationMethod = initialValues.get('communicationMethod');
   }
+  const existingNames = getConnections(state).reduce(
+    (reduction, connection) => {
+      if (connection.get('id') !== ownProps.connectionId) {
+        reduction[connection.get('name')] = true;
+      }
+      return reduction;
+    },
+    {}
+  );
   return {
     initialValues,
     communicationMethod,
+    existingNames,
   };
 };
 
@@ -32,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         dispatch(actions.updateConnection(values.toJS()));
       }
       ownProps.toggleModal();
+    },
+    onSubmitFail(errors) {
+      alert(Object.values(errors).join('\n'));
     },
   };
 };
