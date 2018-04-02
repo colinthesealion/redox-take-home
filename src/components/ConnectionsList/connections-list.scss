@@ -1,0 +1,44 @@
+#root {
+  margin: 10px;
+}
+
+.c-connections-list__table {
+  border-collapse: collapse;
+  margin-top: 5px;
+  border: 1px solid black;
+
+  thead {
+    th {
+      padding: 5px;
+      font-weight: bold;
+    }
+
+    th+th {
+      border-left: 1px solid grey;
+    }
+
+    tr {
+      border: 1px solid black;
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background: lightblue;
+    }
+
+    td {
+      padding: 5px;
+    }
+
+    td+td {
+      border-left: 1px solid grey;
+    }
+  }
+
+  a {
+    color: purple;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import * as Table from 'reactabular-table';
+import BEMHelper from 'react-bem-helper';
 
 import { COMMUNICATION_METHODS } from '../../constants';
+
+import './connections-list.scss';
+
+const classes = new BEMHelper({
+  name: 'connections-list',
+  prefix: 'c-',
+});
 
 /* The columns in our connections list */
 const columns = [
@@ -68,7 +76,10 @@ export default class ConnectionsList extends React.PureComponent {
     };
 
     return (
-      <Table.Provider columns={[ editColumn, ...columns ]}>
+      <Table.Provider
+        columns={[ editColumn, ...columns ]}
+        {...classes({ element: 'table' })}
+      >
         <Table.Header />
         { /* Reactabular is expecting flat javascript objects,
              not an immutable list.

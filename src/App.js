@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Modal } from 'react-overlays';
+import BEMHelper from 'react-bem-helper';
 
 import createStore from './store';
 import ConnectionsList from './containers/ConnectionsList';
 import ConnectionForm from './containers/ConnectionForm';
 
-import './App.css';
+import './App.scss';
+
+const classes = new BEMHelper({
+  name: 'modal',
+  outputIsString: true,
+});
 
 const store = createStore();
 
@@ -40,7 +46,8 @@ class App extends Component {
               <Modal
                 aria-labelledby='modal-label'
                 show={this.state.showModal}
-                onHide={this.toggleModal}
+                backdropClassName={classes({ element: 'backdrop' })}
+                containerClassName={classes({ element: 'container' })}
               >
                 <ConnectionForm toggleModal={this.toggleModal} connectionId={this.state.connectionId} />
               </Modal>

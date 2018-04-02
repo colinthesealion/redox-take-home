@@ -1,0 +1,24 @@
+.connection-form {
+  &__form-body {
+    position: fixed;
+    z-index: 3;
+    background: white;
+    padding: 10px;
+    margin: 10px;
+    top: 25px;
+    left: 0;
+
+    div {
+      margin: 5px;
+    }
+
+    label:not(.radio-group__label) {
+      display: inline-block;
+      width: 200px;
+    }
+  }
+
+  &__button-group {
+    float: right;
+  }
+}

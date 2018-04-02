@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import BEMHelper from 'react-bem-helper';
+
+import './radio-group.scss';
+
+const classes = new BEMHelper({ name: 'radio-group' });
 
 const RadioGroup = ({ input, options, required }) => {
   return (
-    <span>
+    <span {...classes({ element: 'body' })}>
       {options.map((option) => {
         return (
-          <label htmlFor={option} key={option}>
-            {option}
+          <label htmlFor={option} key={option} {...classes({ element: 'label' })}>
             <input
               id={option}
               name={input.name}
@@ -17,6 +21,7 @@ const RadioGroup = ({ input, options, required }) => {
               onChange={input.onChange}
               required={required}
             />
+            {option}
           </label>
         );
       })}
