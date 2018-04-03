@@ -5,7 +5,6 @@ import ConnectionForm from '../../components/ConnectionForm';
 import { actions } from '../../actions/connections';
 import { getConnection, getConnections } from '../../selectors/connections';
 
-
 const mapStateToProps = (state, ownProps) => {
   const formValues = getFormValues('connection')(state);
   const initialValues = getConnection(state, ownProps.connectionId);
@@ -42,9 +41,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         dispatch(actions.updateConnection(values.toJS()));
       }
       ownProps.toggleModal();
-    },
-    onSubmitFail(errors) {
-      alert(Object.values(errors).join('\n'));
     },
   };
 };

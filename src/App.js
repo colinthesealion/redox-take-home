@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Modal } from 'react-overlays';
 import BEMHelper from 'react-bem-helper';
+import urlExists from 'url-exists';
+import Immutable from 'immutable';
 
 import createStore from './store';
 import ConnectionsList from './containers/ConnectionsList';
 import ConnectionForm from './containers/ConnectionForm';
+import { COMMUNICATION_METHODS } from './constants';
 
 import './App.scss';
 
@@ -36,6 +39,42 @@ class App extends Component {
     });
   }
 
+  handleSubmitFail(errors) {
+    if (errors.size) {
+      // Hit a bug in redux-form where the async and sync errors are not merged correctly
+      const asyncErrors = Immutable.Map(errors._root.entries);
+      errors = {
+        ...asyncErrors.toJS(),
+        name: errors.name,
+      };
+    }
+    alert(Object.values(errors).join('\n'));
+  }
+
+  asyncValidate(values) {
+    if (
+      values.get('communicationMethod') === COMMUNICATION_METHODS.HTTPS
+      && values.get('url')
+    ) {
+      const url = values.get('url');
+      return new Promise((resolve, reject) => {
+        urlExists(url, (error, exists) => {
+          if (error || !exists) {
+            reject({
+              url: `Could not reach ${url}.`,
+            });
+          }
+          else {
+            resolve();
+          }
+        });
+      });
+    }
+    else {
+      return Promise.resolve();
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -49,7 +88,13 @@ class App extends Component {
                 backdropClassName={classes({ element: 'backdrop' })}
                 containerClassName={classes({ element: 'container' })}
               >
-                <ConnectionForm toggleModal={this.toggleModal} connectionId={this.state.connectionId} />
+                <ConnectionForm
+                  toggleModal={this.toggleModal}
+                  connectionId={this.state.connectionId}
+                  onSubmitFail={this.handleSubmitFail}
+                  asyncValidate={this.asyncValidate}
+                  asyncBlurFields={[ 'url' ]}
+                />
               </Modal>
             )
           }

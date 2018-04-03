@@ -13,60 +13,60 @@ const classes = new BEMHelper({
   name: 'connection-form',
 });
 
-/**
- * Render any additional fields for the given communication method
- * @param {String} communicationMethod one of HTTPS or TCP
- * @returns {ReactMarkup[]} an array of fields to render
- */
-const renderCommunicationMethodFields = (communicationMethod) => {
-  switch (communicationMethod) {
-    case COMMUNICATION_METHODS.HTTPS: {
-      return [
-        <div key="url" {...classes({ element: 'input-row' })}>
-          <label htmlFor="url" key="url">
-            URL:
-          </label>
-          <Field name="url" component="input" type="text" required />
-        </div>,
-        <div key="requestMethod" {...classes({ element: 'input-row' })}>
-          <label htmlFor="requestMethod" key="requestMethod">
-            Request Method:
-          </label>
-          <Field
-            name="requestMethod"
-            component={RadioGroup}
-            options={[ 'POST', 'GET' ]}
-            required
-          />
-        </div>
-      ];
-    }
-    case COMMUNICATION_METHODS.TCP: {
-      return [
-        <div key="ip" {...classes({ element: 'input-row' })}>
-          <label htmlFor="ip" key="ip">
-            IP:
-          </label>
-          <Field name="ip" component="input" type="text" required />
-        </div>,
-        <div key="port" {...classes({ element: 'input-row' })}>
-          <label htmlFor="port" key="port">
-            Port:
-          </label>
-          <Field name="port" component="input" type="text" />
-        </div>
-      ];
-    }
-    default: {
-      return [];
-    }
-  }
-};
-
 class ConnectionForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.validateName = this.validateName.bind(this);
+  }
+
+  /**
+   * Render any additional fields for the given communication method
+   * @param {String} communicationMethod one of HTTPS or TCP
+   * @returns {ReactMarkup[]} an array of fields to render
+   */
+  renderCommunicationMethodFields(communicationMethod) {
+    switch (communicationMethod) {
+      case COMMUNICATION_METHODS.HTTPS: {
+        return [
+          <div key="url" {...classes({ element: 'input-row' })}>
+            <label htmlFor="url" key="url">
+              URL:
+            </label>
+            <Field name="url" component="input" type="text" required />
+          </div>,
+          <div key="requestMethod" {...classes({ element: 'input-row' })}>
+            <label htmlFor="requestMethod" key="requestMethod">
+              Request Method:
+            </label>
+            <Field
+              name="requestMethod"
+              component={RadioGroup}
+              options={[ 'POST', 'GET' ]}
+              required
+            />
+          </div>
+        ];
+      }
+      case COMMUNICATION_METHODS.TCP: {
+        return [
+          <div key="ip" {...classes({ element: 'input-row' })}>
+            <label htmlFor="ip" key="ip">
+              IP:
+            </label>
+            <Field name="ip" component="input" type="text" required />
+          </div>,
+          <div key="port" {...classes({ element: 'input-row' })}>
+            <label htmlFor="port" key="port">
+              Port:
+            </label>
+            <Field name="port" component="input" type="text" />
+          </div>
+        ];
+      }
+      default: {
+        return [];
+      }
+    }
   }
 
   validateName(name) {
@@ -104,7 +104,7 @@ class ConnectionForm extends React.PureComponent {
               required
             />
           </div>
-          {renderCommunicationMethodFields(this.props.communicationMethod)}
+          {this.renderCommunicationMethodFields(this.props.communicationMethod)}
           <div {...classes({ element: 'button-group' })}>
             <button onClick={this.props.toggleModal}>Cancel</button>
             <button type="submit">Save</button>
