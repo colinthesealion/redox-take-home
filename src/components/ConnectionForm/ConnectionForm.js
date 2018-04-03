@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { reduxForm, Field } from 'redux-form/immutable';
 import BEMHelper from 'react-bem-helper';
+import isIp from 'is-ip';
 
 import { COMMUNICATION_METHODS } from '../../constants';
 import RadioGroup from '../RadioGroup';
@@ -12,6 +13,10 @@ import './connection-form.scss';
 const classes = new BEMHelper({
   name: 'connection-form',
 });
+
+// TCP ports are represented as an unsigned short
+// Therefore the largest value is 2^16 - 1
+const MAX_TCP_PORT_VALUE = Math.pow(2, 16) - 1;
 
 class ConnectionForm extends React.PureComponent {
   constructor(props) {
@@ -53,13 +58,24 @@ class ConnectionForm extends React.PureComponent {
             <label htmlFor="ip" key="ip">
               IP:
             </label>
-            <Field name="ip" component="input" type="text" required />
+            <Field
+              name="ip"
+              component="input"
+              type="text"
+              required
+              validate={this.validateIp}
+            />
           </div>,
           <div key="port" {...classes({ element: 'input-row' })}>
             <label htmlFor="port" key="port">
               Port:
             </label>
-            <Field name="port" component="input" type="text" />
+            <Field
+              name="port"
+              component="input"
+              type="text"
+              validate={this.validatePort}
+            />
           </div>
         ];
       }
@@ -70,8 +86,23 @@ class ConnectionForm extends React.PureComponent {
   }
 
   validateName(name) {
-    if (this.props.existingNames[name]) {
+    if (name && this.props.existingNames[name]) {
       return `The name "${name}" is already in use.`;
+    }
+  }
+
+  validateIp(ip) {
+    if (ip && !isIp(ip)) {
+      return `${ip} is not a valid IP address.`;
+    }
+  }
+
+  validatePort(port) {
+    if (port) {
+      const numericPort = Number(port);
+      if (isNaN(numericPort) || numericPort < 0 || numericPort > MAX_TCP_PORT_VALUE) {
+        return `${port} is not a valid port. Must be in range 0-${MAX_TCP_PORT_VALUE}.`;
+      }
     }
   }
 
