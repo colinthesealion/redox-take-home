@@ -11,7 +11,7 @@ const initialState = Immutable.fromJS([
     id: 1,
     name: 'athena',
     communicationMethod: COMMUNICATION_METHODS.HTTPS,
-    url: 'https://athenanet.com/',
+    url: 'https://athenanet.athenahealth.com/',
     requestMethod: 'POST',
   },
   {
