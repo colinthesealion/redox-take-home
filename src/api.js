@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock';
 
 let nextId = 3;
+fetchMock.config.fallbackToNetwork = true;
 fetchMock.mock(/save/, (url, options) => {
   const body = JSON.parse(options.body);
   return {
