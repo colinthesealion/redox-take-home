@@ -53,7 +53,8 @@ class App extends Component {
 
   asyncValidate(values) {
     if (
-      values.get('communicationMethod') === COMMUNICATION_METHODS.HTTPS
+      false
+      && values.get('communicationMethod') === COMMUNICATION_METHODS.HTTPS
       && values.get('url')
     ) {
       const url = values.get('url');
