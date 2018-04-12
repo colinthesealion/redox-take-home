@@ -6,6 +6,7 @@ import { COMMUNICATION_METHODS } from '../constants';
 import { actionTypes } from '../actions/connections';
 
 /* The default initial state */
+/** hello */
 const initialState = Immutable.fromJS([
   {
     id: 1,
